@@ -1,0 +1,6 @@
+Starting /home/miseryyc/Validator/code/../data/sample_data/F004642_sec_12.dat
+There are  786 queries above 35 and 4476 queries below 35
+There are  507 peptides above 35 and 4298 peptides below 35
+Done with analysis - check your output file.
+validator_3_analysis took 353271.407 ms
+FINISHED

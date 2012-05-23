@@ -1,0 +1,64 @@
+#!/bin/sh
+cd ~/Validator/data
+
+if [ !-f"$3" ]
+then
+	mkdir $3
+fi
+
+cp $1/$2 ~/Validator/data/$3/
+cd ~/Validator/data/$3
+
+if [ -f F004642_sec_12.dat ]
+then 
+	rm -f F004642_sec_12.dat
+fi
+
+mv $2 F004642_sec_12.dat
+
+cd ~/Validator/code
+
+if [ -f log.txt ]
+then
+	rm -f log.txt
+fi
+
+rm -f ~/Validator/output_files/$3/F004642_sec_12/*
+
+export LD_LIBRARY_PATH=.
+python validator.py $3 2>&1 | tee log.txt
+
+echo $5
+if [ $5 = "false" ]
+then
+	exit 0
+fi
+
+cp $1/$6 ~/Validator/supporting_data/
+
+cd ~/Validator/supporting_data
+if [ -f MS2Runs_E1sec12.txt ]
+then
+        rm -f MS2Runs_E1sec12.txt
+fi
+
+mv $6 MS2Runs_E1sec12.txt
+
+cd ~/Validator/code
+
+printf "\nStarting to parse output files with crossref\n">>log.txt
+
+perl ValidatorCrossRef.pl ../output_files/$3/F004642_sec_12/Val_1_pairs.csv ../supporting_data/MS2Runs_E1sec12.txt ../output_files/$3/F004642_sec_12/$4.txt Val1 2>&1 | tee -a log.txt
+
+printf "\nStarting to parse crossref files with quant\n">>log.txt
+perl HanashQuantRevise.pl ../output_files/$3/F004642_sec_12/$4.txt all 2>&1 | tee -a log.txt
+
+printf "\nStarting to analyze validator_3.xls\n" >>log.txt
+perl ValidatorParse.pl ../supporting_data/ValidatorList 2>&1 | tee -a log.txt
+
+grep -q "FINISHED" log.txt
+
+if [ $? -eq 0 ]
+then
+	exit 0
+fi

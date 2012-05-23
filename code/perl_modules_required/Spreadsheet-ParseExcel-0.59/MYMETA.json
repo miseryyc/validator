@@ -1,0 +1,52 @@
+{
+   "abstract" : "Read information from an Excel file.",
+   "author" : [
+      "John McNamara (jmcnamara@cpan.org)"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "ExtUtils::MakeMaker version 6.54, CPAN::Meta::Converter version 2.112621",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Spreadsheet-ParseExcel",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : 0
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : 0
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Crypt::RC4" : 0,
+            "Digest::Perl::MD5" : 0,
+            "IO::File" : 0,
+            "IO::Scalar" : 0,
+            "OLE::Storage_Lite" : "0.19",
+            "Scalar::Util" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "url" : "http://github.com/jmcnamara/spreadsheet-parseexcel"
+      },
+      "x_MailingList" : "http://groups.google.com/group/spreadsheet-parseexcel"
+   },
+   "version" : "0.59"
+}
